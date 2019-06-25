@@ -60,7 +60,7 @@ class Runner {
       if (settings.auditMode && !settings.gatherMode) {
         // No browser required, just load the artifacts from disk.
         const path = Runner._getArtifactsPath(settings);
-        artifacts = await assetSaver.loadArtifacts(path);
+        artifacts = assetSaver.loadArtifacts(path);
         requestedUrl = artifacts.URL.requestedUrl;
 
         if (!requestedUrl) {
@@ -352,12 +352,18 @@ class Runner {
   }
 
   /**
-   * Returns first runtimeError found in artifacts.
+   * Searches a pass's artifacts for any `lhrRuntimeError` error artifacts.
+   * Returns the first one found or `null` if none found.
    * @param {LH.Artifacts} artifacts
    * @return {LH.Result['runtimeError']|undefined}
    */
   static getArtifactRuntimeError(artifacts) {
-    for (const possibleErrorArtifact of Object.values(artifacts)) {
+    const possibleErrorArtifacts = [
+      artifacts.PageLoadError, // Preferentially use `PageLoadError`, if it exists.
+      ...Object.values(artifacts), // Otherwise check amongst all artifacts.
+    ];
+
+    for (const possibleErrorArtifact of possibleErrorArtifacts) {
       if (possibleErrorArtifact instanceof LHError && possibleErrorArtifact.lhrRuntimeError) {
         const errorMessage = possibleErrorArtifact.friendlyMessage || possibleErrorArtifact.message;
 

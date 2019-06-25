@@ -103,6 +103,8 @@ const UIStrings = {
   pwaCategoryManualDescription: 'These checks are required by the baseline ' +
   '[PWA Checklist](https://developers.google.com/web/progressive-web-apps/checklist) but are ' +
   'not automatically checked by Lighthouse. They do not affect your score but it\'s important that you verify them manually.',
+  /** Title of the Best Practices category of audits. This is displayed at the top of a list of audits focused on topics related to following web development best practices and accepted guidelines. Also used as a label of a score gauge; try to limit to 20 characters. */
+  bestPracticesCategoryTitle: 'Best Practices',
   /** Title of the Fast and Reliable section of the web app category. Within this section are audits that check if the web site loaded quickly and can reliably load even if the internet connection is very slow or goes offline. */
   pwaFastReliableGroupTitle: 'Fast and reliable',
   /** Title of the Installable section of the web app category. Within this section are audits that check if Chrome supports installing the web site as an app on their device. */
@@ -144,7 +146,6 @@ const defaultConfig = {
       'seo/embedded-content',
       'seo/robots-txt',
       'seo/tap-targets',
-      // Always run axe last because it scrolls the page down to the bottom
       'accessibility',
     ],
   },
@@ -179,6 +180,7 @@ const defaultConfig = {
     'screenshot-thumbnails',
     'final-screenshot',
     'metrics/estimated-input-latency',
+    'metrics/cumulative-long-queuing-delay',
     'metrics/max-potential-fid',
     'errors-in-console',
     'time-to-first-byte',
@@ -208,6 +210,7 @@ const defaultConfig = {
     'offline-start-url',
     'performance-budget',
     'resource-summary',
+    'third-party-summary',
     'manual/pwa-cross-browser',
     'manual/pwa-page-transitions',
     'manual/pwa-each-page-has-url',
@@ -375,7 +378,7 @@ const defaultConfig = {
         {id: 'first-cpu-idle', weight: 2, group: 'metrics'},
         {id: 'max-potential-fid', weight: 0, group: 'metrics'},
         {id: 'estimated-input-latency', weight: 0}, // intentionally left out of metrics so it won't be displayed
-
+        {id: 'cumulative-long-queuing-delay', weight: 0}, // intentionally left out of metrics so it won't be displayed
         {id: 'render-blocking-resources', weight: 0, group: 'load-opportunities'},
         {id: 'uses-responsive-images', weight: 0, group: 'load-opportunities'},
         {id: 'offscreen-images', weight: 0, group: 'load-opportunities'},
@@ -400,6 +403,7 @@ const defaultConfig = {
         {id: 'font-display', weight: 0, group: 'diagnostics'},
         {id: 'performance-budget', weight: 0, group: 'budgets'},
         {id: 'resource-summary', weight: 0, group: 'diagnostics'},
+        {id: 'third-party-summary', weight: 0, group: 'diagnostics'},
         // Audits past this point don't belong to a group and will not be shown automatically
         {id: 'network-requests', weight: 0},
         {id: 'network-rtt', weight: 0},
@@ -470,7 +474,7 @@ const defaultConfig = {
       ],
     },
     'best-practices': {
-      title: 'Best Practices',
+      title: str_(UIStrings.bestPracticesCategoryTitle),
       auditRefs: [
         {id: 'appcache-manifest', weight: 1},
         {id: 'is-on-https', weight: 1},
