@@ -83,5 +83,10 @@ async function generateErrorLHR() {
   mkdirp(TMP);
   fs.writeFileSync(`${TMP}/artifacts.json`, JSON.stringify(artifacts), 'utf-8');
   const errorRunnerResult = await lighthouse(url, {auditMode: TMP});
-  return /** @type {LH.RunnerResult} */ (errorRunnerResult).lhr;
+  const errorLhr = /** @type {LH.RunnerResult} */ (errorRunnerResult).lhr;
+  errorLhr.runWarnings = [
+    'Something went wrong with recording the trace over your page load. ' +
+    'Please run Lighthouse again. (NO_FCP)'
+  ];
+  return errorLhr;
 }
