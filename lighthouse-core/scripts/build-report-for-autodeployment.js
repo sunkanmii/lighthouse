@@ -78,15 +78,40 @@ async function generateErrorLHR() {
   };
   // @ts-ignore driver isn't mocked out completely
   const artifacts = await GatherRunner.initializeBaseArtifacts(options);
+  // Add in a global runWarning
+  artifacts.LighthouseRunWarnings.push(`Something went wrong with recording the trace over your
+  page load. Please run Lighthouse again. (NO_FCP)`);
 
+  // Save artifacts to disk then run `lighthouse -G` with them
   const TMP = `${DIST}/.tmp/`;
   mkdirp(TMP);
   fs.writeFileSync(`${TMP}/artifacts.json`, JSON.stringify(artifacts), 'utf-8');
   const errorRunnerResult = await lighthouse(url, {auditMode: TMP});
   const errorLhr = /** @type {LH.RunnerResult} */ (errorRunnerResult).lhr;
-  errorLhr.runWarnings = [
-    'Something went wrong with recording the trace over your page load. ' +
-    'Please run Lighthouse again. (NO_FCP)'
+
+  // Add audit warnings to font-display
+  errorLhr.audits['font-display'].warnings = [
+    'Lighthouse was unable to automatically check the font-display value for the following URL: https://secure-ds.serving-sys.com/resources/PROD/html5/105657/20190307/1074580285/43862346571980472/fonts/IBMPlexSans-Light-Latin1.woff.',
+    'Lighthouse was unable to automatically check the font-display value for the following URL: https://secure-ds.serving-sys.com/resources/PROD/html5/105657/20190307/1074580285/43862346571980472/fonts/IBMPlexSans-Bold-Latin1.woff.',
   ];
+  // perf/offscreen-images - set as passing but with a warning
+  Object.assign(errorLhr.audits['offscreen-images'], {
+    warnings: [
+      'Invalid image sizing information: https://cdn.cnn.com/cnn/.e1mo/img/4.0/vr/vr_new_asset.png',
+    ],
+    errorMessage: undefined,
+    scoreDisplayMode: 'binary',
+    score: 1,
+  });
+  // pwa-apple-touch-icon - set as passing but with a warning
+  Object.assign(errorLhr.audits['apple-touch-icon'], {
+    warnings: [
+      '`apple-touch-icon-precomposed` is out of date; `apple-touch-icon` is preferred.',
+    ],
+    errorMessage: undefined,
+    scoreDisplayMode: 'binary',
+    score: 1,
+  });
+
   return errorLhr;
 }

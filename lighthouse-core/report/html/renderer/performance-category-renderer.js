@@ -220,6 +220,8 @@ class PerformanceCategoryRenderer extends CategoryRenderer {
       element.appendChild(groupEl);
     }
 
+    // TODO: Handle passed w/ warnings in a unique clump like non-perf categories do
+
     // Passed audits
     const passedAudits = category.auditRefs
         .filter(audit => (audit.group === 'load-opportunities' || audit.group === 'diagnostics') &&
