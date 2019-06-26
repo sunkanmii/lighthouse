@@ -29,6 +29,7 @@ const DIST = path.join(__dirname, `../../dist`);
     english: lhr,
     espanol: swapLocale(lhr, 'es').lhr,
     arabic: swapLocale(lhr, 'ar').lhr,
+    'xl-accented': swapLocale(lhr, 'en-XL').lhr,
     error: errorLhr,
   };
 
@@ -39,6 +40,8 @@ const DIST = path.join(__dirname, `../../dist`);
     for (const variant of ['', '-devtools']) {
       if (variant === '-devtools') {
         // TODO: Make the DevTools Audits panel "emulation" more comprehensive
+        // - the parent widget/vbox container with overflow
+        // - a more constrained/realistic default size
         html = html.replace(`"lh-root lh-vars"`, `"lh-root lh-vars lh-devtools"`);
       }
       const filepath = `${DIST}/${filename}${variant}/index.html`;
