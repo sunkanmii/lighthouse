@@ -95,23 +95,21 @@ async function generateErrorLHR() {
     'Lighthouse was unable to automatically check the font-display value for the following URL: https://secure-ds.serving-sys.com/resources/PROD/html5/105657/20190307/1074580285/43862346571980472/fonts/IBMPlexSans-Bold-Latin1.woff.',
   ];
   // perf/offscreen-images - set as passing but with a warning
-  Object.assign(errorLhr.audits['offscreen-images'], {
-    warnings: [
-      'Invalid image sizing information: https://cdn.cnn.com/cnn/.e1mo/img/4.0/vr/vr_new_asset.png',
-    ],
-    errorMessage: undefined,
-    scoreDisplayMode: 'binary',
-    score: 1,
-  });
+  const offscreenImagesAudit = errorLhr.audits['offscreen-images'];
+  offscreenImagesAudit.warnings = [
+    'Invalid image sizing information: https://cdn.cnn.com/cnn/.e1mo/img/4.0/vr/vr_new_asset.png',
+  ];
+  offscreenImagesAudit.errorMessage = undefined;
+  offscreenImagesAudit.scoreDisplayMode = 'binary';
+  offscreenImagesAudit.score = 1;
   // pwa-apple-touch-icon - set as passing but with a warning
-  Object.assign(errorLhr.audits['apple-touch-icon'], {
-    warnings: [
-      '`apple-touch-icon-precomposed` is out of date; `apple-touch-icon` is preferred.',
-    ],
-    errorMessage: undefined,
-    scoreDisplayMode: 'binary',
-    score: 1,
-  });
+  const appleTouchIconAudit = errorLhr.audits['apple-touch-icon'];
+  appleTouchIconAudit.warnings = [
+    '`apple-touch-icon-precomposed` is out of date; `apple-touch-icon` is preferred.',
+  ];
+  appleTouchIconAudit.errorMessage = undefined;
+  appleTouchIconAudit.scoreDisplayMode = 'binary';
+  appleTouchIconAudit.score = 1;
 
   return errorLhr;
 }
