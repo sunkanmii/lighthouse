@@ -76,7 +76,7 @@ async function generateErrorLHR() {
       getBrowserVersion: () => ({userAgent: 'Mozilla/5.0 ErrorUserAgent Chrome/66'}),
     },
   };
-  //@ts-ignore driver isn't mocked out completely
+  // @ts-ignore driver isn't mocked out completely
   const artifacts = await GatherRunner.initializeBaseArtifacts(options);
 
   const TMP = `${DIST}/.tmp/`;
