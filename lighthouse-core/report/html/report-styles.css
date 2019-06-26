@@ -149,29 +149,29 @@
     --color-green-700: var(--color-green);
     --color-teal-600: var(--color-cyan-500);
     --color-orange-700: var(--color-orange);
-  
+
     --color-black-200: var(--color-black-800);
     --color-black-400: var(--color-black-600);
     --color-black-600: var(--color-black-500);
-  
+
     --topbar-bg: var(--color-black);
     --plugin-badge-bg: var(--color-black-800);
     --env-item-bg: var(--color-black);
     --report-secondary-border-color: var(--color-black-200);
-  
+
     --body-background-color: var(--color-black-900);
     --body-text-color: var(--color-black-100);
     --secondary-text-color: var(--color-black-400);
-  
+
     --plugin-icon-url: var(--plugin-icon-url-dark);
-  
+
     --informative-color: var(--color-blue-200);
-  
+
     --medium-50-gray: #757575;
     --medium-75-gray: var(--color-white);
-  
+
     --color-hover: rgba(0, 0, 0, 0.2);
-  
+
     --pwa-fast-reliable-gray-url: var(--pwa-fast-reliable-gray-url-dark);
     --pwa-installable-gray-url: var(--pwa-installable-gray-url-dark);
     --pwa-optimized-gray-url: var(--pwa-optimized-gray-url-dark);
@@ -1336,7 +1336,6 @@
 
 .lh-table .lh-table-column--thumbnail {
   width: var(--image-preview-size);
-  position: relative;
   padding: 0;
 }
 
@@ -1370,13 +1369,7 @@
 }
 
 .lh-thumbnail {
-  background-size: cover;
-  background-repeat: no-repeat;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
+  object-fit: cover;
 }
 
 /* Chevron
