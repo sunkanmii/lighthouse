@@ -987,6 +987,10 @@
     "message": "Interactive on simulated mobile network at {timeInMs, number, seconds} s",
     "description": "Label for the audit identifying the time it took for the page to become interactive on a mobile network."
   },
+  "lighthouse-core/audits/load-fast-enough-for-pwa.js | explanationLoadSlow": {
+    "message": "Your page loads too slowly and is not interactive within 10 seconds. Look at the opportunities and diagnostics in the \"Performance\" section to learn how to improve.",
+    "description": "Explanatory message stating that there was a failure in an audit caused by the page loading too slowly to be considered interactive quickly. This references another Lighthouse auditing category, \"Performance\", that can give additional details on performance debugging."
+  },
   "lighthouse-core/audits/load-fast-enough-for-pwa.js | failureTitle": {
     "message": "Page load is not fast enough on mobile networks",
     "description": "Imperative title of a Lighthouse audit that tells the user that their page has loaded fast enough to be considered a Progressive Web App. This imperative title is shown to users when the web page has loaded too slowly to be considered a Progressive Web App."
