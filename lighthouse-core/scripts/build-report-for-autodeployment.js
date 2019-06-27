@@ -26,11 +26,11 @@ const DIST = path.join(__dirname, `../../dist`);
   const errorLhr = await generateErrorLHR();
 
   const filenameToLhr = {
-    english: lhr,
-    espanol: swapLocale(lhr, 'es').lhr,
-    arabic: swapLocale(lhr, 'ar').lhr,
+    'english': lhr,
+    'espanol': swapLocale(lhr, 'es').lhr,
+    'arabic': swapLocale(lhr, 'ar').lhr,
     'xl-accented': swapLocale(lhr, 'en-XL').lhr,
-    error: errorLhr,
+    'error': errorLhr,
   };
 
   // Generate and write reports
