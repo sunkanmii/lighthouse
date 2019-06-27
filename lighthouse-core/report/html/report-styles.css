@@ -1370,6 +1370,8 @@
 
 .lh-thumbnail {
   object-fit: cover;
+  width: var(--image-preview-size);
+  height: var(--image-preview-size);
 }
 
 /* Chevron
