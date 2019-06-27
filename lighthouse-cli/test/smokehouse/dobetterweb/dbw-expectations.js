@@ -74,64 +74,6 @@ module.exports = [
         },
         undefined, // marks end of array
       ],
-      // TagsBlockingFirstPaint: {
-      //   0: {
-      //     tag: {
-      //       tagName: 'LINK',
-      //       url: 'http://localhost:10200/dobetterweb/dobetterweb/dbw_tester.css?delay=100',
-      //     },
-      //   },
-      //   1: {
-      //     tag: {
-      //       tagName: 'LINK',
-      //       url: 'http://localhost:10200/dobetterweb/unknown404.css?delay=200',
-      //     },
-      //   },
-      //   2: {
-      //     tag: {
-      //       tagName: 'LINK',
-      //       url: 'http://localhost:10200/dobetterweb/dbw_tester.css?delay=2200',
-      //     },
-
-      //   },
-      //   3: {
-      //     tag: {
-      //       tagName: 'LINK',
-      //       url: 'http://localhost:10200/dobetterweb/dbw_partial_a.html?delay=200',
-      //     },
-      //   },
-      //   4: {
-      //     tag: {
-      //       tagName: 'LINK',
-      //       url: 'http://localhost:10200/dobetterweb/dbw_tester.css?delay=3000&capped',
-      //       mediaChanges: [
-      //         {
-      //           href: 'http://localhost:10200/dobetterweb/dbw_tester.css?delay=3000&capped',
-      //           media: 'not-matching',
-      //           matches: false,
-      //         },
-      //         {
-      //           href: 'http://localhost:10200/dobetterweb/dbw_tester.css?delay=3000&capped',
-      //           media: 'screen',
-      //           matches: true,
-      //         },
-      //       ],
-      //     },
-      //   },
-      //   5: {
-      //     tag: {
-      //       tagName: 'SCRIPT',
-      //       url: 'http://localhost:10200/dobetterweb/dbw_tester.js',
-      //     },
-      //   },
-      //   6: {
-      //     tag: {
-      //       tagName: 'SCRIPT',
-      //       url: 'http://localhost:10200/dobetterweb/fcp-delayer.js?delay=5000',
-      //     },
-      //   },
-      //   length: 7,
-      // },
     },
     lhr: {
       requestedUrl: 'http://localhost:10200/dobetterweb/dbw_tester.html',
