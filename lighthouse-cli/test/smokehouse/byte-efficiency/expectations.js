@@ -141,7 +141,7 @@ module.exports = [
                 resourceSize: 52997,
               },
               {
-                url: "http://localhost:10200/favicon.ico",
+                url: 'http://localhost:10200/favicon.ico',
               },
             ],
           },
