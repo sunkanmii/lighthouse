@@ -5,6 +5,8 @@
  */
 'use strict';
 
+const IS_ARRAY = {};
+
 /**
  * Expected Lighthouse audit values for sites with various errors.
  */
@@ -24,10 +26,10 @@ module.exports = [
     artifacts: {
       PageLoadError: {code: 'PAGE_HUNG'},
       devtoolsLogs: {
-        'pageLoadError-defaultPass': [/* ... */],
+        'pageLoadError-defaultPass': IS_ARRAY,
       },
       traces: {
-        'pageLoadError-defaultPass': {traceEvents: [/* ... */]},
+        'pageLoadError-defaultPass': {traceEvents: IS_ARRAY},
       },
     },
   },
@@ -46,10 +48,10 @@ module.exports = [
     artifacts: {
       PageLoadError: {code: 'INSECURE_DOCUMENT_REQUEST'},
       devtoolsLogs: {
-        'pageLoadError-defaultPass': [/* ... */],
+        'pageLoadError-defaultPass': IS_ARRAY,
       },
       traces: {
-        'pageLoadError-defaultPass': {traceEvents: [/* ... */]},
+        'pageLoadError-defaultPass': {traceEvents: IS_ARRAY},
       },
     },
   },
