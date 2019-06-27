@@ -90,7 +90,9 @@ async function generateErrorLHR() {
   mkdirp(TMP);
   fs.writeFileSync(`${TMP}/artifacts.json`, JSON.stringify(artifacts), 'utf-8');
   const errorRunnerResult = await lighthouse(url, {auditMode: TMP});
-  const errorLhr = /** @type {LH.RunnerResult} */ (errorRunnerResult).lhr;
+
+  if (!errorRunnerResult) throw new Error('Failed to run lighthouse on empty artifacts');
+  const errorLhr = errorRunnerResult.lhr;
 
   // Add audit warnings to font-display
   errorLhr.audits['font-display'].warnings = [
