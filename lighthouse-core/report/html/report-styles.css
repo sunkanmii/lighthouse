@@ -43,6 +43,7 @@
   --lh-tools-icon-size: var(--lh-score-icon-background-size);
   --lh-tools-icon-color: var(--medium-75-gray);
   --lh-table-higlight-bg: hsla(0, 0%, 75%, 0.1);
+  --image-preview-size: 48px;
   --lh-sparkline-height: 5px;
   --lh-audit-vpadding: 8px;
   --lh-audit-group-vpadding: 8px;
@@ -187,6 +188,7 @@
     --gauge-circle-size-big: 96px;
     --gauge-circle-size: 72px;
     --header-padding: 16px 0 16px 0;
+    --image-preview-size: 24px;
     --plugin-icon-size: 75%;
     --pwa-icon-margin: 0 7px 0 -3px;
     --score-container-width: 112px;
@@ -1286,7 +1288,6 @@
 }
 
 .lh-table {
-  --image-preview-size: 48px;
   border-collapse: collapse;
   /* Can't assign padding to table, so shorten the width instead. */
   width: calc(100% - var(--inner-audit-left-padding));
@@ -1372,6 +1373,7 @@
   object-fit: cover;
   width: var(--image-preview-size);
   height: var(--image-preview-size);
+  display: block;
 }
 
 /* Chevron
