@@ -66,26 +66,26 @@ function addPluginCategory(lhr) {
 }
 
 /**
- * Generate an LHR with errors for the renderer to display
- * We'll write an "empty" artifacts file to disk, only to use it in auditMode
+ * Generate an LHR with errors for the renderer to display.
+ * We'll write an "empty" artifacts file to disk, only to use it in auditMode.
  * @return {Promise<LH.Result>}
  */
 async function generateErrorLHR() {
+  /** @typedef {import('../gather/driver.js')} Driver */
   const url = 'http://fakeurl.com';
   const options = {
     requestedUrl: url,
     settings: defaultSettings,
-    driver: {
+    driver: /** @type {Driver} */ ( /** @type {unknown} */ ({
       getBrowserVersion: () => ({userAgent: 'Mozilla/5.0 ErrorUserAgent Chrome/66'}),
-    },
+    })),
   };
-  // @ts-ignore driver isn't mocked out completely
   const artifacts = await GatherRunner.initializeBaseArtifacts(options);
   // Add in a global runWarning
   artifacts.LighthouseRunWarnings.push(`Something went wrong with recording the trace over your
   page load. Please run Lighthouse again. (NO_FCP)`);
 
-  // Save artifacts to disk then run `lighthouse -G` with them
+  // Save artifacts to disk then run `lighthouse -G` with them.
   const TMP = `${DIST}/.tmp/`;
   mkdirp(TMP);
   fs.writeFileSync(`${TMP}/artifacts.json`, JSON.stringify(artifacts), 'utf-8');
