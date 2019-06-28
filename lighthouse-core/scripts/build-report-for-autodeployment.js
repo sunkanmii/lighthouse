@@ -14,7 +14,6 @@ const mkdirp = require('mkdirp').sync;
 const swapLocale = require('../lib/i18n/swap-locale.js');
 
 const ReportGenerator = require('../../lighthouse-core/report/report-generator.js');
-const GatherRunner = require('../gather/gather-runner.js');
 const {defaultSettings} = require('../config/constants.js');
 const lighthouse = require('../index.js');
 const lhr = /** @type {LH.Result} */ (require('../../lighthouse-core/test/results/sample_v2.json'));
@@ -71,25 +70,34 @@ function addPluginCategory(lhr) {
  * @return {Promise<LH.Result>}
  */
 async function generateErrorLHR() {
-  /** @typedef {import('../gather/driver.js')} Driver */
-  const url = 'http://fakeurl.com';
-  const options = {
-    requestedUrl: url,
+  /** @type {LH.BaseArtifacts} */
+  const artifacts = {
+    fetchTime: '2019-06-26T23:56:58.381Z',
+    LighthouseRunWarnings: [
+      `Something went wrong with recording the trace over your page load. Please run Lighthouse again. (NO_FCP)`, // eslint-disable-line max-len
+    ],
+    TestedAsMobileDevice: true,
+    HostUserAgent: 'Mozilla/5.0 ErrorUserAgent Chrome/66',
+    NetworkUserAgent: 'Mozilla/5.0 ErrorUserAgent Chrome/66',
+    BenchmarkIndex: 1000,
+    WebAppManifest: null,
+    Stacks: [],
     settings: defaultSettings,
-    driver: /** @type {Driver} */ ( /** @type {unknown} */ ({
-      getBrowserVersion: () => ({userAgent: 'Mozilla/5.0 ErrorUserAgent Chrome/66'}),
-    })),
+    URL: {
+      requestedUrl: 'http://fakeurl.com',
+      finalUrl: 'http://fakeurl.com',
+    },
+    Timing: [],
+    PageLoadError: null,
+    devtoolsLogs: {},
+    traces: {},
   };
-  const artifacts = await GatherRunner.initializeBaseArtifacts(options);
-  // Add in a global runWarning
-  artifacts.LighthouseRunWarnings.push(`Something went wrong with recording the trace over your
-  page load. Please run Lighthouse again. (NO_FCP)`);
 
   // Save artifacts to disk then run `lighthouse -G` with them.
   const TMP = `${DIST}/.tmp/`;
   mkdirp(TMP);
   fs.writeFileSync(`${TMP}/artifacts.json`, JSON.stringify(artifacts), 'utf-8');
-  const errorRunnerResult = await lighthouse(url, {auditMode: TMP});
+  const errorRunnerResult = await lighthouse(artifacts.URL.requestedUrl, {auditMode: TMP});
 
   if (!errorRunnerResult) throw new Error('Failed to run lighthouse on empty artifacts');
   const errorLhr = errorRunnerResult.lhr;
