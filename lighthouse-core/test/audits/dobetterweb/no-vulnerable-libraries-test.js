@@ -99,3 +99,13 @@ describe('Avoids front-end JavaScript libraries with known vulnerabilities', () 
     assert.equal(auditResult.score, 1);
   });
 });
+
+describe('No glob in snyk', () => {
+  for (const vulns of Object.values(NoVulnerableLibrariesAudit.snykDB.npm)) {
+    for (const vuln of vulns) {
+      for (const semver of vuln.semver.vulnerable) {
+        assert.notEqual(semver, '*');
+      }
+    }
+  }
+});
