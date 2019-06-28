@@ -104,7 +104,14 @@ describe('No glob in snyk', () => {
   for (const vulns of Object.values(NoVulnerableLibrariesAudit.snykDB.npm)) {
     for (const vuln of vulns) {
       for (const semver of vuln.semver.vulnerable) {
-        assert.notEqual(semver, '*');
+        assert.notEqual(semver, '*', 'invalid semver: * is not allowed');
+
+        const clauses = semver.split('||');
+        for (const clause of clauses) {
+          if (!clause.trim().startsWith('=') && !clause.includes('<')) {
+            assert.fail(`invalid semver: ${semver}. Must contain an upper bound`);
+          }
+        }
       }
     }
   }
